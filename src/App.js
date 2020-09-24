@@ -1,24 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import TopBar from './TopBar.js';
+import Textual from './Textual.js';
+import Visual from './Visual.js';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          AWS Knowledge Finder
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* Header */}
+      <TopBar />
+      {/* Textual Panel Left */}
+      <Textual />
+      {/* Visual Panel Right */}
+      <Visual />
     </div>
   );
 }

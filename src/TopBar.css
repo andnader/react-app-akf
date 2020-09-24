@@ -1,0 +1,26 @@
+.SearchBar {
+  text-align: left;
+  height: 40px;
+  flex : 4;
+}
+
+.Logo {
+  text-align: left;
+  height: 40px;
+  flex :2;
+}
+
+.Menu {
+  height: 40px;
+  flex : 1;
+}
+
+
+.TopFixedMenu{
+  background-color: white;
+  box-shadow: -16px -8px 11px 2px;
+  height: 40px;
+  width: 100%;
+  align: right;
+  display: flex;
+}
