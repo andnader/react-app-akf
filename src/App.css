@@ -1,15 +1,15 @@
-.App {
+.app {
     text-align: center;
   }
 
-  .Textual{
+  .app__textual{
       width: 50%;
       float: left;
       /*background: orange;*/
       height: 100vh;
   }
 
-  .Visual{
+  .app__visual{
       margin-left:50%;
       /*background: yellow;*/
       height: 100vh;

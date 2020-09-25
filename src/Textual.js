@@ -3,7 +3,7 @@ import './App.css';
 
 function Textual(){
     return (
-        <div className="Textual">
+        <div className="app__textual">
         Textual
         </div>
     )

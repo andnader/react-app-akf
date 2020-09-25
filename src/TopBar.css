@@ -1,26 +1,27 @@
-.SearchBar {
+.header__searchbar {
   text-align: left;
-  height: 40px;
-  flex : 4;
-}
-
-.Logo {
-  text-align: left;
-  height: 40px;
-  flex :2;
-}
-
-.Menu {
-  height: 40px;
   flex : 1;
 }
 
+.header__logo {
+  text-align: left;
+  flex :2;
+}
 
-.TopFixedMenu{
+.header__menu {
+}
+
+.header__filterdropdown {
+  text-align: left;
+  flex: 1;
+}
+
+
+.header{
+  height: 50px;
   background-color: white;
   box-shadow: -16px -8px 11px 2px;
-  height: 40px;
-  width: 100%;
-  align: right;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

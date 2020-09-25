@@ -1,21 +1,26 @@
 import React from 'react'
 import './TopBar.css';
 import TimelineOutlinedIcon from '@material-ui/icons/TimelineOutlined';
-import ListOutlinedIcon from '@material-ui/icons/ListOutlined';
+import BasicTextFields from './SearchBar.js'
+import SimpleMenu from './Menu.js'
+import FilterButton from './Filter.js'
 
 function TopBar(){
     return (
         <>
-        <div className="TopFixedMenu">
-            <div className="Menu">
-            <ListOutlinedIcon />
+        <div className="header">
+            <div className="header__menu">
+            <SimpleMenu/>
             </div>
-            <div className="Logo">
-            <TimelineOutlinedIcon />
-            AWS Knowledge Finder
+            <div className="header__logo">
+            <TimelineOutlinedIcon fontSize="large"/>
+            &nbsp; AWS Knowledge Finder
             </div>
-            <div className="SearchBar">
-            Search Bar
+            <div className="header__searchbar">
+            <BasicTextFields/>
+            </div>
+            <div className="header__filterdropdown">
+            <FilterButton/>
             </div>
         </div>
         </>

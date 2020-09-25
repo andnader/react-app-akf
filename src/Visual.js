@@ -3,7 +3,7 @@ import './App.css';
 
 function Visual(){
     return (
-        <div className="Visual">
+        <div className="app_visual">
         Visual
         </div>
     )
