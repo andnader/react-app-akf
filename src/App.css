@@ -15,4 +15,17 @@
       margin-left:50%;
       /*background: yellow;*/
       height: 90vh;
+      vertical-align: top;
+  }
+
+  .vis-react {
+    width: 65rem;
+    height: 40rem;
+    border: none;
+    padding: 2rem;
+    display: block;
+    margin: 0 auto;
+  }
+  .vis-react-title {
+    text-align: center;
   }
