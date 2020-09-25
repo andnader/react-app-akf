@@ -3,7 +3,7 @@ import './App.css';
 import TopBar from './TopBar.js';
 import Textual2 from './Textual2.js';
 import Textual from './Textual.js';
-import Visual from './Visual.js';
+/*import Visual from './Visual.js';*/
 import {
   BrowserRouter as Router,
   Switch,
