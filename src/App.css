@@ -6,7 +6,7 @@
       width: 50%;
       float: left;
       /*background: orange;*/
-      height: 100vh;
+      height: 90vh;
       align-items: center;
       /*padding-top: 10px;*/
   }
@@ -14,5 +14,5 @@
   .app__visual{
       margin-left:50%;
       /*background: yellow;*/
-      height: 100vh;
+      height: 90vh;
   }
