@@ -42,7 +42,7 @@ export default function Textual() {
                 >
                     Node Type: Person
                 </Typography>
-                {" — I'll be in your neighborhood doing errands this…"}
+                {" — Expert in Cloud PACS Systems"}
                 </React.Fragment>
             }
             />
@@ -64,7 +64,7 @@ export default function Textual() {
                 >
                     Node Type: Person
                 </Typography>
-                {" — Wish I could come, but I'm out of town this…"}
+                {" — Serverless Guru"}
                 </React.Fragment>
             }
             />
@@ -86,7 +86,7 @@ export default function Textual() {
                 >
                     Node Type: Person
                 </Typography>
-                {' — Do you have Paris recommendations? Have you ever…'}
+                {' — Experienced in Molecular Therapeutics'}
                 </React.Fragment>
             }
             />
