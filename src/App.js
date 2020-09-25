@@ -23,14 +23,14 @@ function App() {
             <Textual2 />
 
             {/* Visual Panel Right */}
-            <Visual />
+            {/*<Visual />*/}
           </Route>
           <Route path="/">
             {/* Textual Panel Left */}
             <Textual />
 
             {/* Visual Panel Right */}
-            <Visual />
+            {/*<Visual />*/}
           </Route>
         </Switch>
       </Router> 
