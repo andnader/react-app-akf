@@ -1,22 +1,21 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import Input from '@material-ui/core/Input';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
-      width: '25ch',
     },
   },
 }));
 
-export default function BasicTextFields() {
+export default function Inputs() {
   const classes = useStyles();
 
   return (
-    <form className={classes.root} noValidate autoComplete="off">
-      <TextField id="standard-basic" label="Search" />
+    <form className={classes.root} noValidate autoComplete="on">
+      <Input placeholder="Search" inputProps={{ 'aria-label': 'description' }} type="sumbit" id="Go"/>
     </form>
   );
 }
