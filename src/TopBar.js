@@ -5,7 +5,7 @@ import BasicTextFields from './SearchBar.js'
 import SimpleMenu from './Menu.js'
 import FilterButton from './Filter.js'
 
-function TopBar(){
+function TopBar(props){
     return (
         <>
         <div className="header">
@@ -17,7 +17,7 @@ function TopBar(){
             &nbsp; AWS Knowledge Finder
             </div>
             <div className="header__searchbar">
-            <BasicTextFields/>
+            <BasicTextFields updateSearch={props.updateSearch}/>
             </div>
             <div className="header__filterdropdown">
             <FilterButton/>

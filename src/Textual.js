@@ -15,7 +15,8 @@ const rows = [
   { weight: 3, name: 'David Fletcher', title: 'Mgr Solutions Architect'},
 ];
 
-export default function Textual2() {
+export default function Textual(props) {
+  console.log(props.search)
   return (
     <div className="app__textual">
       <DataGrid rows={rows} columns={columns} pageSize={5} />

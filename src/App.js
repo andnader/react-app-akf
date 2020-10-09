@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import TopBar from './TopBar.js';
 import Textual2 from './Textual2.js';
@@ -11,10 +11,12 @@ import {
 } from "react-router-dom";
 
 function App() {
+  const [searchValue, setValue] = useState("");
+
   return (
     <div className="app">
     {/* Header */}
-    <TopBar />
+    <TopBar updateSearch={setValue}/>
      <Router>
         <Switch>
         {/* Default path "/" MUST be at bottom of Route list*/}
@@ -27,7 +29,7 @@ function App() {
           </Route>
           <Route path="/">
             {/* Textual Panel Left */}
-            <Textual />
+            <Textual search={searchValue}/>
 
             {/* Visual Panel Right */}
             <Visual />
