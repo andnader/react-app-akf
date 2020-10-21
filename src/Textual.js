@@ -3,10 +3,10 @@ import { DataGrid } from '@material-ui/data-grid';
 import './App.css';
 
 const columns = [
-  { field: 'id', headerName: 'id', width: 60 },
+  //{ field: 'id', headerName: 'id', width: 60 },
   { field: 'nodeType', headerName: 'Node Type', width: 120 },
-  { field: 'name', headerName: 'Name', width: 200 },
-  { field: 'title', headerName: 'Title', width: 200 }
+  { field: 'display_name', headerName: 'Label', width: 200 },
+  { field: 'display_description', headerName: 'Description', width: 200 }
 
 ];
 
@@ -20,13 +20,14 @@ const rows = [
 function setRows(rows, len, apiResponse){
 
   for (var i = 0; i < len; i++){
-    console.log(apiResponse[i])
-    rows.push({id: apiResponse[i].id, nodeType: apiResponse[i].node_type, name: apiResponse[i].properties});
+    //console.log(apiResponse[i])
+    //let properties = apiResponse[i].properties.json()
+    rows.push({nodeType: apiResponse[i].node_type, display_name: apiResponse[i].display_name, display_description: apiResponse[i].display_description});
   }
 }
 
 export default function Textual(props) {
-  //console.log(props.search)
+  console.log(props.search)
 
   /* API CALL*/
 

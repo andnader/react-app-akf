@@ -47,7 +47,7 @@ let options = {
     }
   },
   groups: {
-    Physics: {
+    Person: {
       color: {
         background: "#ffffff",
         border: "#acdbae",
@@ -61,7 +61,7 @@ let options = {
         }
       }
     },
-    Chemistry: {
+    Technology: {
       color: {
         background: "#ffffff",
         border: "#f3bd86",
@@ -75,7 +75,7 @@ let options = {
         }
       }
     },
-    Biology: {
+    Topic: {
       color: {
         background: "#ffffff",
         border: "#c89dc8",
@@ -89,21 +89,7 @@ let options = {
         }
       }
     },
-    Mathematics: {
-      color: {
-        background: "#ffffff",
-        border: "#52CBEC",
-        highlight: {
-          border: "#52CBEC",
-          background: "#ffffff"
-        },
-        hover: {
-          border: "#52CBEC",
-          background: "#ffffff"
-        }
-      }
-    },
-    English: {
+    Experience: {
       color: {
         background: "#ffffff",
         border: "#c2b59b",
@@ -116,34 +102,20 @@ let options = {
           background: "#ffffff"
         }
       }
-    },
-    "Logical Reasoning": {
-      color: {
-        background: "#ffffff",
-        border: "#87a6aa",
-        highlight: {
-          border: "#87a6aa",
-          background: "#ffffff"
-        },
-        hover: {
-          border: "#87a6aa",
-          background: "#ffffff"
-        }
-      }
     }
   },
-  // physics: {
-  //   forceAtlas2Based: {
-  //       gravitationalConstant: -200,
-  //       centralGravity: 0.05,
-  //       springLength: 230,
-  //       springConstant: 0.08,
-  //       avoidOverlap:9
-  //   },
-  //   solver: 'forceAtlas2Based',
-  //   timestep: 0.35,
-  //   stabilization: {enabled:true,iterations: 10}
-  // },
+  /* physics: {
+     forceAtlas2Based: {
+        gravitationalConstant: -200,
+        centralGravity: 0.05,
+        springLength: 230,
+        springConstant: 0.08,
+        avoidOverlap:9
+    },
+    solver: 'forceAtlas2Based',
+    timestep: 0.35,
+    stabilization: {enabled:true,iterations: 10}
+   }, */
   physics: {
     barnesHut: {
       gravitationalConstant: -30000,
@@ -206,7 +178,7 @@ export default class VisReact extends Component {
         jsonData[0].relation.root_kt_node[i].id =
           jsonData[0].relation.root_kt_node[i].from;
         jsonData[0].relation.root_kt_node[i].group =
-          jsonData[0].relation.root_kt_node[i].seo_subject_name;
+          jsonData[0].relation.root_kt_node[i].type;
         nodes.push(jsonData[0].relation.root_kt_node[i]);
       }
       for (let j = 0; j < jsonData[0].relation.leading_to_links.length; j++) {
@@ -226,7 +198,7 @@ export default class VisReact extends Component {
         jsonData[0].relation.leading_to_links[j].id =
           jsonData[0].relation.leading_to_links[j].to;
         jsonData[0].relation.leading_to_links[j].group =
-          jsonData[0].relation.leading_to_links[j].seo_subject_name;
+          jsonData[0].relation.leading_to_links[j].type;
         nodes.push(jsonData[0].relation.leading_to_links[j]);
       }
       for (let k = 0; k < jsonData[0].relation.derived_from_links.length; k++) {
@@ -246,7 +218,7 @@ export default class VisReact extends Component {
         jsonData[0].relation.derived_from_links[k].id =
           jsonData[0].relation.derived_from_links[k].from;
         jsonData[0].relation.derived_from_links[k].group =
-          jsonData[0].relation.derived_from_links[k].seo_subject_name;
+          jsonData[0].relation.derived_from_links[k].type;
         nodes.push(jsonData[0].relation.derived_from_links[k]);
       }
       for (let i = 0; i < nodes.length; i++) {
