@@ -165,7 +165,9 @@ export default class VisReact extends Component {
         this.redirectToLearn(event, this.props.searchData);
       }
     };
-    let jsonData = initialGraph;
+
+    console.log(this.props.nodeGraph)
+    let jsonData = initialGraph//this.props.nodeGraph;
 
     let nodes = [];
     let edges = [];

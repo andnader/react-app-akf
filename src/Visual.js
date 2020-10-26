@@ -2,10 +2,11 @@ import React from 'react'
 import './App.css';
 import VisReact from "./Visreact.js";
 
-function Visual(){
+function Visual(props){
+  //console.log(props.nodeGraph)
     return (
     <div className="app__visual">
-    <VisReact />
+    <VisReact nodeGraph={props.nodeGraph}/>
   </div>
   );
 }
