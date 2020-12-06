@@ -1,0 +1,98 @@
+[
+    {
+      "content_code": "p-1",
+      "relation": {
+        "root_kt_node": [
+          {
+            "source": "Medical Imaging",
+            "target": "",
+            "from": "to-3",
+            "to": "",
+            "weight": "",
+            "label": "Definition",
+            "type": "Topic",
+            "id": 0,
+            "seo_subject_name": "Healthcare",
+            "concept_url": "study/pulse-rate-concept?entity_code=KTBBFC52"
+          }
+        ],
+        "leading_to_links": [
+          {
+            "source": "Medical Imaging",
+            "target": "Andrew Nader",
+            "from": "to-3",
+            "to": "p-1",
+            "weight": "4",
+            "label": "knowledge_of",
+            "type": "Person",
+            "id": 5851,
+            "seo_subject_name": "Solutions Architect",
+            "concept_url": "study/cardiac-output-concept?entity_code=KTBBFC55"
+          },
+          {
+            "source": "Medical Imaging",
+            "target": "Drew Dresser",
+            "from": "to-3",
+            "to": "p-2",
+            "weight": "3",
+            "label": "knowledge_of",
+            "type": "Person",
+            "id": 5852,
+            "seo_subject_name": "Solutions Architect",
+            "concept_url": "study/structure-of-heart-concept?entity_code=KTBBFC56"
+          },
+          {
+            "source": "Medical Imaging",
+            "target": "Naomi Joshi",
+            "from": "to-3",
+            "to": "p-3",
+            "weight": "5",
+            "label": "knowledge_of",
+            "type": "Person",
+            "id": 5894,
+            "seo_subject_name": "Application Architect",
+            "concept_url": "study/electrocardiography-ecg-concept?entity_code=KTBBFC98"
+          },
+          {
+            "source": "Medical Imaging",
+            "target": "Image Guided Therapy - Cloud Native Migration",
+            "from": "to-3",
+            "to": "e-1",
+            "weight": "",
+            "label": "related_to",
+            "type": "Experience",
+            "id": 5895,
+            "seo_subject_name": "Philips",
+            "concept_url": "study/double-circulation-concept?entity_code=KTBBFC99"
+          },
+          {
+            "source": "Medical Imaging",
+            "target": "Pacs - radiology imagery machine learning",
+            "from": "to-3",
+            "to": "e-2",
+            "weight": "",
+            "label": "related_to",
+            "type": "Experience",
+            "id": 5898,
+            "seo_subject_name": "Philips",
+            "concept_url": "study/circulatory-disorders-concept?entity_code=KTBBFC102"
+          },
+          {
+            "source": "Medical Imaging",
+            "target": "AI/ML with medical Medical Imaging data",
+            "from": "to-3",
+            "to": "e-3",
+            "weight": "",
+            "label": "related_to",
+            "type": "Experience",
+            "id": 5923,
+            "seo_subject_name": "GE",
+            "concept_url": "study/regulation-of-cardiac-output-concept?entity_code=KTBBFC127"
+          }
+        ],
+        "derived_from_links": [
+        ]
+      }
+    }
+  ]
+  

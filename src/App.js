@@ -12,13 +12,13 @@ import {
 
 function App() {
   const [searchValue, setValue] = useState("");
-  const [apiResponse, setApiResponse] = useState ([""]);
+  const [apiResponse, setApiResponse] = useState (Object);
   const url = 'https://yeww6vusz1.execute-api.us-east-1.amazonaws.com/node_graph';
   const payload = {
     //"searchTerm": props.search,
     //"nodeType": "none"
-    //"nodeId": searchValue
-    "nodeId": "to-1"
+    "nodeId": searchValue
+    //"nodeId": "to-1"
   };
 
   const options = {

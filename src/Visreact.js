@@ -166,8 +166,9 @@ export default class VisReact extends Component {
       }
     };
 
-    console.log(this.props.nodeGraph)
+    //console.log(this.props.nodeGraph)
     let jsonData = initialGraph//this.props.nodeGraph;
+    //console.log(jsonData)
 
     let nodes = [];
     let edges = [];
