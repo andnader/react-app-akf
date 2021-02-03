@@ -12,28 +12,50 @@ import {
 
 function App() {
   const [searchValue, setValue] = useState("");
+  const [nodeID, setNodeID] = useState("");
   const [apiResponse, setApiResponse] = useState (Object);
-  const url = 'https://yeww6vusz1.execute-api.us-east-1.amazonaws.com/node_graph';
-  const payload = {
-    //"searchTerm": props.search,
-    //"nodeType": "none"
-    "nodeId": searchValue
-    //"nodeId": "to-1"
+  const [nodegraphApiResponse, setnodegraphApiResponse] = useState (Object);
+  
+  //API Call to search endpoint
+  const searchurl = 'https://yeww6vusz1.execute-api.us-east-1.amazonaws.com/search';
+  const searchpayload = {
+    "searchTerm": searchValue
   };
 
-  const options = {
+  const searchoptions = {
     method: 'POST',
-    body: JSON.stringify(payload)
+    body: JSON.stringify(searchpayload)
   };
 
   useEffect (() => {
-    fetch(url, options)
-    .then(res => res.json())
-    .then(res => setApiResponse(res))
+    fetch(searchurl, searchoptions)
+    .then(searchres => searchres.json())
+    .then(searchres => setApiResponse(searchres))
     .catch(error => console.log(error));
   }, [searchValue]);
 
-  //console.log(apiResponse)
+  //
+  //
+  //
+  //API Call for node_graph endpoint
+  const nodegraphurl = 'https://yeww6vusz1.execute-api.us-east-1.amazonaws.com/node_graph';
+  const nodegraphpayload = {
+    "nodeId": nodeID
+  };
+
+  const nodegraphoptions = {
+    method: 'POST',
+    body: JSON.stringify(nodegraphpayload)
+  };
+
+  useEffect (() => {
+    fetch(nodegraphurl, nodegraphoptions)
+    .then(nodegraphres => nodegraphres.json())
+    .then(nodegraphres => setnodegraphApiResponse(nodegraphres))
+    .catch(error => console.log(error));
+  }, [nodeID]);
+
+  //console.log(nodegraphApiResponse)
 
   return (
     <div className="app">
@@ -42,19 +64,12 @@ function App() {
      <Router>
         <Switch>
         {/* Default path "/" MUST be at bottom of Route list*/}
-          <Route path="/option2">
-            {/* Textual Panel Left */}
-            <Textual2 />
-
-            {/* Visual Panel Right */}
-            {/*<Visual />*/}
-          </Route>
           <Route path="/">
             {/* Textual Panel Left */}
             {/*<Textual search={searchValue}/> */}
-            <Textual apiResponse={apiResponse}/>
+            <Textual apiResponse={apiResponse} setNodeID={setNodeID}/>
             {/* Visual Panel Right */}
-            <Visual nodeGraph={apiResponse}/>
+            <Visual nodeGraph={nodegraphApiResponse}/>
           </Route>
         </Switch>
       </Router> 

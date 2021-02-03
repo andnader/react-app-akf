@@ -137,16 +137,27 @@ let options = {
 };
 
 export default class VisReact extends Component {
+ 
   setState(stateObj) {
     if (this.mounted) {
       super.setState(stateObj);
     }
   }
+  
   componentWillMount() {
     this.mounted = true;
   }
+
+
+  /*
+  state = {
+    nodeGraph: initialGraph
+  };
+  */
+
   constructor(props) {
     super(props);
+    this.state = {nodeGraph: null}
     this.events = {
       select: function(event) {
         var { nodes, edges } = event;
@@ -166,9 +177,7 @@ export default class VisReact extends Component {
       }
     };
 
-    //console.log(this.props.nodeGraph)
-    let jsonData = initialGraph//this.props.nodeGraph;
-    //console.log(jsonData)
+    let jsonData = this.state.nodeGraph;
 
     let nodes = [];
     let edges = [];
@@ -254,9 +263,25 @@ export default class VisReact extends Component {
     );
   }
 
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.nodeGraph !== this.props.nodeGraph){
+      //this.setState({nodeGraph: this.props.nodeGraph});
+      console.log(this.state.nodeGraph);
+      this.loadData();
+      //this.forceUpdate();
+    }
+  }
+
   componentDidMount() {
     this.mounted = true;
     window.addEventListener("resize", this.measure);
+    //this.loadData();
+  }
+
+  loadData() {
+    this.setState({nodeGraph: this.props.nodeGraph});
+    console.log(this.state.nodeGraph)
   }
 
   componentWillUnmount() {
@@ -429,6 +454,10 @@ export default class VisReact extends Component {
     console.log(data);
   };
   render() {
+    if (!this.state.nodeGraph){
+      return <div />
+    }
+    else{
     return (
       <Fragment>
         <Graph
@@ -444,4 +473,5 @@ export default class VisReact extends Component {
       </Fragment>
     );
   }
+}
 }
