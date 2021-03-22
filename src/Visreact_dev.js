@@ -1,7 +1,9 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment, useS } from "react";
 import Graph from "vis-react";
 // import { getObjects } from '../../../Utils';
 import initialGraph from "./Data.json";
+import { v4 as uuidv4 } from "uuid";
+import { TrainRounded } from "@material-ui/icons";
 var highlightActive = false;
 
 let options = {
@@ -137,16 +139,34 @@ let options = {
 };
 
 export default class VisReact extends Component {
+ 
   setState(stateObj) {
     if (this.mounted) {
       super.setState(stateObj);
     }
   }
+  
   componentWillMount() {
     this.mounted = true;
   }
+
+
+  /*
+  state = {
+    nodeGraph: initialGraph
+  };
+  */
+
   constructor(props) {
     super(props);
+    this.state = {
+      graph: {
+        nodes: [],
+        edges: []
+      },
+      style: null,
+      network: null
+    }
     this.events = {
       select: function(event) {
         var { nodes, edges } = event;
@@ -166,14 +186,72 @@ export default class VisReact extends Component {
       }
     };
 
-    //console.log(this.props.nodeGraph)
-    let jsonData = initialGraph//this.props.nodeGraph;
-    //console.log(jsonData)
+    this.measure = this.measure.bind(this);
+    this.events.hoverNode = this.events.hoverNode.bind(this);
+    this.events.blurNode = this.events.blurNode.bind(this);
+    this.events.click = this.events.click.bind(this);
+    this.neighbourhoodHighlight = this.neighbourhoodHighlight.bind(this);
+    this.redirectToLearn = this.redirectToLearn.bind(this);
+    this.neighbourhoodHighlightHide = this.neighbourhoodHighlightHide.bind(
+      this
+    );
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    if (this.state.graph == nextState.graph){
+      //this.loadData(initialGraph);
+      return true
+    }
+    else {
+      //this.loadData(initialGraph);
+      return true
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.nodeGraph !== this.props.nodeGraph){
+      //this.setState({nodeGraph: this.props.nodeGraph});
+      //console.log(this.props.nodeGraph);
+      this.loadData();
+      //this.forceUpdate();
+    }
+  }
+
+  componentDidMount() {
+    this.mounted = true;
+    window.addEventListener("resize", this.measure);
+    //this.loadData();
+    //this.loadData();
+  }
+
+  loadData() {
+    
+    let apiObject = [this.props.nodeGraph]
+    
+    if(apiObject.relation){ //&& apiObject.relation.root_kt_node && apiObject.relation.leading_to_links){
+      let relation = apiObject.relation;
+      let rootNode = relation.root_kt_node[0];
+      let leadingNodes = relation.leading_to_links;
+
+      console.log(rootNode)
+      console.log(leadingNodes)
+    }
+    
+    let jsonData = apiObject;
+    let relation = apiObject.relation
+    console.log(initialGraph)
+
+    /*
+    if (!jsonData && !jsonData.relation && !jsonData.relation.root_kt_node){
+    console.log('check')
+    return true
+    }
+    */
 
     let nodes = [];
     let edges = [];
 
-    if (jsonData && jsonData.length > 0) {
+    if (jsonData && jsonData.length > 0 && jsonData.relation) {
       for (let i = 0; i < jsonData[0].relation.root_kt_node.length; i++) {
         jsonData[0].relation.root_kt_node[i].color = undefined;
         jsonData[0].relation.root_kt_node[i].label =
@@ -238,25 +316,24 @@ export default class VisReact extends Component {
     let newGraph = {};
     newGraph.nodes = nodes;
     newGraph.edges = edges;
-    this.state = {
+    console.log(newGraph);
+    this.setState({
       graph: newGraph,
       style: { width: "100%", height: "100%" },
       network: null
-    };
-    this.measure = this.measure.bind(this);
-    this.events.hoverNode = this.events.hoverNode.bind(this);
-    this.events.blurNode = this.events.blurNode.bind(this);
-    this.events.click = this.events.click.bind(this);
-    this.neighbourhoodHighlight = this.neighbourhoodHighlight.bind(this);
-    this.redirectToLearn = this.redirectToLearn.bind(this);
-    this.neighbourhoodHighlightHide = this.neighbourhoodHighlightHide.bind(
-      this
-    );
+    });
+    console.log(this.state)
   }
 
-  componentDidMount() {
-    this.mounted = true;
-    window.addEventListener("resize", this.measure);
+  clearGraph(){
+    this.setState({
+      graph: {
+        nodes: [],
+        edges: []
+      },
+      style: null,
+      network: null
+    })
   }
 
   componentWillUnmount() {
@@ -429,9 +506,20 @@ export default class VisReact extends Component {
     console.log(data);
   };
   render() {
+    if (!this.state.nodeGraph){
+      console.log("Not Rendering Graph")
+      console.log(this.state.graph)
+      return <div />
+    }
+    else{
+      console.log("Rendering Graph")
+      console.log(this.state)
+      //this.loadData(initialGraph)
+      //this.clearGraph();
     return (
       <Fragment>
         <Graph
+          key={uuidv4}
           graph={this.state.graph}
           style={this.state.style}
           options={options}
@@ -445,4 +533,4 @@ export default class VisReact extends Component {
     );
   }
 }
-
+}

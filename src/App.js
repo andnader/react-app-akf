@@ -13,6 +13,7 @@ import {
 function App() {
   const [searchValue, setValue] = useState("");
   const [nodeID, setNodeID] = useState("");
+  //const [finalGraph, setFinalGraph] = useState(Object);
   const [apiResponse, setApiResponse] = useState (Object);
   const [nodegraphApiResponse, setnodegraphApiResponse] = useState (Object);
   
@@ -69,7 +70,7 @@ function App() {
             {/*<Textual search={searchValue}/> */}
             <Textual apiResponse={apiResponse} setNodeID={setNodeID}/>
             {/* Visual Panel Right */}
-            <Visual nodeGraph={nodegraphApiResponse}/>
+            <Visual nodeGraph={nodegraphApiResponse} /*finalGraph={finalGraph} setFinalGraph={setFinalGraph}*//>
           </Route>
         </Switch>
       </Router> 

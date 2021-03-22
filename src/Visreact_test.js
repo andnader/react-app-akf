@@ -2,8 +2,8 @@ import React, { Component, Fragment, useEffect, useState } from "react";
 import Graph from "vis-react";
 import './App.css';
 import initialGraph from "./Data.json";
+import { v4 as uuidv4 } from "uuid";
 
-/*
 const graph = {
 	nodes: [
 		{ id: 1, label: 'Node 1' },
@@ -19,7 +19,7 @@ const graph = {
 		{ from: 2, to: 5, arrows: "from" }
 	]
 };
-*/
+
 
 var options = {
     layout: {
@@ -159,81 +159,88 @@ let style = {
 };
 
 function setGraph(nodes, edges, jsonData){
-
-if (jsonData && jsonData.length > 0) {
-  for (let i = 0; i < jsonData[0].relation.root_kt_node.length; i++) {
-    jsonData[0].relation.root_kt_node[i].color = undefined;
-    jsonData[0].relation.root_kt_node[i].label =
-      jsonData[0].relation.root_kt_node[i].source;
-    jsonData[0].relation.root_kt_node[i].id =
-      jsonData[0].relation.root_kt_node[i].from;
-    jsonData[0].relation.root_kt_node[i].group =
-      jsonData[0].relation.root_kt_node[i].type;
-    nodes.push(jsonData[0].relation.root_kt_node[i]);
-  }
-  for (let j = 0; j < jsonData[0].relation.leading_to_links.length; j++) {
-    if (
-      jsonData[0].relation.leading_to_links[j].target.length > 20 &&
-      jsonData[0].relation.leading_to_links[j].target.indexOf("\n") === -1
-    ) {
-      jsonData[0].relation.leading_to_links[
-        j
-      ].target = jsonData[0].relation.leading_to_links[j].target
-        .split(" ")
-        .reduce((a, e, i) => a + e + (i % 20 === 3 ? "\n" : " "), " ");
-    }
-    jsonData[0].relation.leading_to_links[j].color = undefined;
-    jsonData[0].relation.leading_to_links[j].label =
-      jsonData[0].relation.leading_to_links[j].target;
-    jsonData[0].relation.leading_to_links[j].id =
-      jsonData[0].relation.leading_to_links[j].to;
-    jsonData[0].relation.leading_to_links[j].group =
-      jsonData[0].relation.leading_to_links[j].type;
-    nodes.push(jsonData[0].relation.leading_to_links[j]);
-  }
-  for (let k = 0; k < jsonData[0].relation.derived_from_links.length; k++) {
-    if (
-      jsonData[0].relation.derived_from_links[k].source.length > 20 &&
-      jsonData[0].relation.derived_from_links[k].source.indexOf("\n") === -1
-    ) {
-      jsonData[0].relation.derived_from_links[
-        k
-      ].source = jsonData[0].relation.derived_from_links[k].source
-        .split(" ")
-        .reduce((a, e, i) => a + e + (i % 20 === 3 ? "\n" : " "), " ");
-    }
-    jsonData[0].relation.derived_from_links[k].color = undefined;
-    jsonData[0].relation.derived_from_links[k].label =
-      jsonData[0].relation.derived_from_links[k].source;
-    jsonData[0].relation.derived_from_links[k].id =
-      jsonData[0].relation.derived_from_links[k].from;
-    jsonData[0].relation.derived_from_links[k].group =
-      jsonData[0].relation.derived_from_links[k].type;
-    nodes.push(jsonData[0].relation.derived_from_links[k]);
-  }
-  for (let i = 0; i < nodes.length; i++) {
-    if (nodes[i].target !== "" && nodes[i].to !== "") {
-      let edgeDir = {};
-      edgeDir.from = nodes[i].from;
-      edgeDir.to = nodes[i].to;
-      edgeDir.arrows = "to";
-      edges.push(edgeDir);
+  if(jsonData[0].relation && jsonData[0].relation.root_kt_node && jsonData[0].relation.leading_to_links) {
+    if (jsonData && jsonData.length > 0) {
+      for (let i = 0; i < jsonData[0].relation.root_kt_node.length; i++) {
+        jsonData[0].relation.root_kt_node[i].color = undefined;
+        jsonData[0].relation.root_kt_node[i].label =
+          jsonData[0].relation.root_kt_node[i].source;
+        jsonData[0].relation.root_kt_node[i].id =
+          jsonData[0].relation.root_kt_node[i].from;
+        jsonData[0].relation.root_kt_node[i].group =
+          jsonData[0].relation.root_kt_node[i].type;
+        nodes.push(jsonData[0].relation.root_kt_node[i]);
+      }
+      for (let j = 0; j < jsonData[0].relation.leading_to_links.length; j++) {
+        if (
+          jsonData[0].relation.leading_to_links[j].target.length > 20 &&
+          jsonData[0].relation.leading_to_links[j].target.indexOf("\n") === -1
+        ) {
+          jsonData[0].relation.leading_to_links[
+            j
+          ].target = jsonData[0].relation.leading_to_links[j].target
+            .split(" ")
+            .reduce((a, e, i) => a + e + (i % 20 === 3 ? "\n" : " "), " ");
+        }
+        jsonData[0].relation.leading_to_links[j].color = undefined;
+        jsonData[0].relation.leading_to_links[j].label =
+          jsonData[0].relation.leading_to_links[j].target;
+        jsonData[0].relation.leading_to_links[j].id =
+          jsonData[0].relation.leading_to_links[j].to;
+        jsonData[0].relation.leading_to_links[j].group =
+          jsonData[0].relation.leading_to_links[j].type;
+        nodes.push(jsonData[0].relation.leading_to_links[j]);
+      }
+     /* for (let k = 0; k < jsonData[0].relation.derived_from_links.length; k++) {
+        if (
+          jsonData[0].relation.derived_from_links[k].source.length > 20 &&
+          jsonData[0].relation.derived_from_links[k].source.indexOf("\n") === -1
+        ) {
+          jsonData[0].relation.derived_from_links[
+            k
+          ].source = jsonData[0].relation.derived_from_links[k].source
+            .split(" ")
+            .reduce((a, e, i) => a + e + (i % 20 === 3 ? "\n" : " "), " ");
+        }
+        jsonData[0].relation.derived_from_links[k].color = undefined;
+        jsonData[0].relation.derived_from_links[k].label =
+          jsonData[0].relation.derived_from_links[k].source;
+        jsonData[0].relation.derived_from_links[k].id =
+          jsonData[0].relation.derived_from_links[k].from;
+        jsonData[0].relation.derived_from_links[k].group =
+          jsonData[0].relation.derived_from_links[k].type;
+        nodes.push(jsonData[0].relation.derived_from_links[k]);
+      } */
+      for (let i = 0; i < nodes.length; i++) {
+        if (nodes[i].target !== "" && nodes[i].to !== "") {
+          let edgeDir = {};
+          edgeDir.from = nodes[i].from;
+          edgeDir.to = nodes[i].to;
+          edgeDir.arrows = "to";
+          edges.push(edgeDir);
+        }
+      }
     }
   }
 }
 
+function clearGraph(finalGraph){
+  finalGraph.length = 0;
 }
+
 
 export default function VisReact_test(props){
 
 //const [newGraph, setNewGraph] = useState({nodes: [], edges: []});
-//const [finalGraph, setFinalGraph] = useState({graph: {}, style: {}, network: null});
+//const [finalGraph, setFinalGraph] = useState(Object);
 //const [nodes, setNodes] = useState([]);
 //const [edges, setEdges] = useState([]);
 
-let newGraph = {};
+//clearGraph()
+
 let finalGraph = {};
 
+/*
 var events = {
 	select: function(event) {
 		var { nodes, edges } = event;
@@ -248,30 +255,28 @@ var events = {
         //this.redirectToLearn(event, this.props.searchData);
     }
 };
+*/
 
-let jsonData = initialGraph;
-let nodes = [];
-let edges = [];
+let jsonData = [props.nodeGraph];
+console.log(jsonData)
+//let nodes = [];
+//let edges = [];
 
-//console.log(data.nodes[1])
-//console.log(data.edges[1].to)
+
+//setGraph(nodes, edges, jsonData)
+
+//let newGraph = {nodes: [], edges: []};
+//newGraph.nodes.push(nodes);
+//newGraph.edges.push(edges);
+
+//setNewGraph({nodes: nodes, edges: edges})
+//props.setFinalGraph(newGraph);
 
 /*
-if (data) {
-    for (var i = 0; i < data.nodes.length; i++) {
-        nodes.push(data.nodes[i]);
-    };
-    
-    for (let i = 0; i < data.edges.length; i++) {
-        edges.push(data.edges[i]);
-    };
-};*/
-
-setGraph(nodes, edges, jsonData)
-
-newGraph.nodes = nodes;
-newGraph.edges = edges;
-finalGraph = {graph: newGraph, style: { width: "100%", height: "100%" }, network: null};
+nodes = [];
+edges = [];
+newGraph = {};
+*/
 
 /*
 useEffect (() => {
@@ -286,10 +291,11 @@ return(
     <div className="app__visual_graph">
     <Fragment>
       <Graph
-        graph={finalGraph.graph}
-        options={options}
-        events={events}
-        style={finalGraph.style}
+        //key={uuidv4}
+        //graph={finalGraph}
+        //options={options}
+        //events={events}
+        //style={finalGraph.style}
         //getNetwork={props.getNetwork}
         //getEdges={props.getEdges}
         //getNodes={props.getNodes}
@@ -298,5 +304,6 @@ return(
     </Fragment>
     </div>
 );
+
 }
 
